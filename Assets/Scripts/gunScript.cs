@@ -6,7 +6,8 @@ public class gunScript : MonoBehaviour
 {
     public GameObject bullet, bulletSpawnPoint;
 
-    public float bulSpeed = 10.0f;
+    public float bulSpeed;
+    public float bulDestroyTime;
 
     void Start()
     {
@@ -23,6 +24,8 @@ public class gunScript : MonoBehaviour
             bulClone.transform.position = bulletSpawnPoint.transform.position;
 
             bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed);
+
+            Destroy(bulClone, bulDestroyTime);
         }
 
     }
