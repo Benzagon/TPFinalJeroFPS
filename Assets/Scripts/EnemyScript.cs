@@ -8,11 +8,9 @@ public class EnemyScript : MonoBehaviour
     public Text killCounterTxt;
     public GameObject player;
 
-    int enemiesKilled;
-
     void Start()
     {
-        enemiesKilled = player.GetComponent<playerScript>().enemiesKilled;
+        
     }
 
     void Update()
@@ -25,10 +23,7 @@ public class EnemyScript : MonoBehaviour
         if(collision.collider.tag == "bullet")
         {
             Destroy(gameObject);
-            enemiesKilled += 1;
-
-            killCounterTxt.text = ("Enemies Killed " + enemiesKilled);
-            player.GetComponent<playerScript>().enemiesKilled = enemiesKilled;
+            player.GetComponent<playerScript>().killedEnemy = true;
         }
     }
 }

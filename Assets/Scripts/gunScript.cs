@@ -9,9 +9,14 @@ public class gunScript : MonoBehaviour
     public float bulSpeed;
     public float bulDestroyTime;
 
+    public bool gunMod = false;
+
+    public AudioClip shootSound;
+    AudioSource audSrc;
+
     void Start()
     {
-        
+        audSrc = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -19,13 +24,37 @@ public class gunScript : MonoBehaviour
         //Click To Shoot
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //Spawns Bullets
-            GameObject bulClone = Instantiate(bullet);
-            bulClone.transform.position = bulletSpawnPoint.transform.position;
+            //Standard gun code
+            if (gunMod == false)
+            {
+                //Spawns Bullets
+                GameObject bulClone = Instantiate(bullet);
+                bulClone.transform.position = bulletSpawnPoint.transform.position;
 
-            bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed);
+                bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed);
 
-            Destroy(bulClone, bulDestroyTime);
+                Destroy(bulClone, bulDestroyTime);
+
+                audSrc.clip = shootSound;
+                audSrc.Play();
+            }
+
+            //Shotgun Code
+            else
+            {
+                for (int i = 1; i <= 12; i++)
+                {
+                    GameObject bulClone = Instantiate(bullet);
+                    bulClone.transform.position = bulletSpawnPoint.transform.position;
+
+                    bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed * i);
+
+                    Destroy(bulClone, bulDestroyTime);
+
+                    audSrc.clip = shootSound;
+                    audSrc.Play();
+                }
+            }
         }
 
     }

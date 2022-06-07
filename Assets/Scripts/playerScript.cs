@@ -7,10 +7,16 @@ using UnityEngine.SceneManagement;
 public class playerScript : MonoBehaviour
 {
     public int health;
-    public int enemiesKilled;
+    int enemiesKilled;
     Vector3 startPos;
 
+    public bool killedEnemy = false;
+
     public GameObject hp1, hp2, hp3;
+    public GameObject gun;
+    public GameObject winText;
+
+    public Text killCounterTxt;
 
     void Start()
     {
@@ -19,7 +25,13 @@ public class playerScript : MonoBehaviour
 
     void Update()
     {
-        
+        if(killedEnemy)
+        {
+            enemiesKilled++;
+
+            killCounterTxt.text = ("Enemies Killed " + enemiesKilled);
+            killedEnemy = false;
+        }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -45,10 +57,27 @@ public class playerScript : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene);
+                //SceneManager.LoadScene(SceneManager.GetActiveScene);
             }
             transform.position = startPos;
-            Debug.Log("Ded");
+        }
+
+        //ShotgunActive
+        if(hit.collider.name == "ShotGunMod")
+        {
+            gun.GetComponent<gunScript>().gunMod = true;
+        }
+
+        //FlagPole
+        if (hit.collider.name == "FlagPole")
+        {
+            winText.SetActive(true);
+        }
+
+        //CP
+        else if(hit.collider.name == "CP")
+        {
+            startPos = new Vector3(30f, 10.5f, -37f);
         }
     }
 }
