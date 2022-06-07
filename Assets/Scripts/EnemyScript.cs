@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class EnemyScript : MonoBehaviour
 {
     public Text killCounterTxt;
-    public GameObject player;
+    public GameObject player, gameManager;
 
     void Start()
     {
-        
+       
     }
 
     void Update()
@@ -24,6 +24,7 @@ public class EnemyScript : MonoBehaviour
         {
             Destroy(gameObject);
             player.GetComponent<playerScript>().killedEnemy = true;
+            gameManager.GetComponent<gameManagerScript>().playDeathNoise();
         }
     }
 }
