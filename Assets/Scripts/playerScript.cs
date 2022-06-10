@@ -17,6 +17,11 @@ public class playerScript : MonoBehaviour
     public GameObject winText;
 
     public Text killCounterTxt;
+    public Text timer;
+
+    float time = 0f;
+
+
 
     void Start()
     {
@@ -32,6 +37,14 @@ public class playerScript : MonoBehaviour
             killCounterTxt.text = ("Enemies Killed " + enemiesKilled);
             killedEnemy = false;
         }
+        
+        if(Input.GetKey(KeyCode.R))
+        {
+            startPos = new Vector3(30f, 10.5f, -37f);
+        }
+
+        time += Time.deltaTime;
+        timer.text = Mathf.Floor(time).ToString();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -57,7 +70,7 @@ public class playerScript : MonoBehaviour
             }
             else
             {
-                //SceneManager.LoadScene(SceneManager.GetActiveScene);
+                SceneManager.LoadScene("Main");
             }
             transform.position = startPos;
         }
@@ -79,5 +92,6 @@ public class playerScript : MonoBehaviour
         {
             startPos = new Vector3(30f, 10.5f, -37f);
         }
+
     }
 }

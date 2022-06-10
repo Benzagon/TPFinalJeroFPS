@@ -42,7 +42,7 @@ public class gunScript : MonoBehaviour
             //Shotgun Code
             else
             {
-                for (int i = 1; i <= 12; i++)
+                for (int i = 1; i <= 10; i++)
                 {
                     GameObject bulClone = Instantiate(bullet);
                     bulClone.transform.position = bulletSpawnPoint.transform.position;
