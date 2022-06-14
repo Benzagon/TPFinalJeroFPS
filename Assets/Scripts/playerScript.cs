@@ -15,13 +15,12 @@ public class playerScript : MonoBehaviour
     public GameObject hp1, hp2, hp3;
     public GameObject gun;
     public GameObject winText;
+    public GameObject gunMod;
 
     public Text killCounterTxt;
     public Text timer;
 
     float time = 0f;
-
-
 
     void Start()
     {
@@ -70,28 +69,30 @@ public class playerScript : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Main");
+                SceneManager.LoadScene("LoseScene");
             }
             transform.position = startPos;
         }
-
+    }
+    private void OnTriggerEnter(Collider other)
+    {
         //ShotgunActive
-        if(hit.collider.name == "ShotGunMod")
+        if(other.name == "ShotGunMod")
         {
             gun.GetComponent<gunScript>().gunMod = true;
+            Destroy(gunMod);
         }
 
         //FlagPole
-        if (hit.collider.name == "FlagPole")
+        if (other.name == "FlagPole")
         {
             winText.SetActive(true);
         }
 
         //CP
-        else if(hit.collider.name == "CP")
+        else if (other.name == "CP")
         {
             startPos = new Vector3(30f, 10.5f, -37f);
         }
-
     }
 }
