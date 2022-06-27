@@ -30,7 +30,7 @@ public class gunScript : MonoBehaviour
                 //Spawns Bullets
                 GameObject bulClone = Instantiate(bullet);
                 bulClone.transform.position = bulletSpawnPoint.transform.position;
-
+                
                 bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed);
 
                 Destroy(bulClone, bulDestroyTime);
@@ -47,7 +47,7 @@ public class gunScript : MonoBehaviour
                     GameObject bulClone = Instantiate(bullet);
                     bulClone.transform.position = bulletSpawnPoint.transform.position;
 
-                    bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed * i);
+                    bulClone.GetComponent<Rigidbody>().AddForce(transform.forward * bulSpeed);
 
                     Destroy(bulClone, bulDestroyTime);
 
