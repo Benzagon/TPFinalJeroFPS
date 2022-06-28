@@ -11,11 +11,14 @@ public class playerScript : MonoBehaviour
     Vector3 startPos;
 
     public bool killedEnemy = false;
+    bool hasWon = false;
 
     public GameObject hp1, hp2, hp3;
     public GameObject gun;
     public GameObject winText;
     public GameObject gunMod;
+    public GameObject CPFlag;
+    public GameObject WinFlag;
 
     public Text killCounterTxt;
     public Text timer;
@@ -42,7 +45,10 @@ public class playerScript : MonoBehaviour
             startPos = new Vector3(30f, 10.5f, -37f);
         }
 
-        time += Time.deltaTime;
+        if(hasWon == false)
+        {
+            time += Time.deltaTime;
+        }
         timer.text = Mathf.Floor(time).ToString();
     }
 
@@ -87,12 +93,15 @@ public class playerScript : MonoBehaviour
         if (other.name == "FlagPole")
         {
             winText.SetActive(true);
+            WinFlag.GetComponent<FlagScript>().activateFlag();
+            hasWon = true;
         }
 
         //CP
         else if (other.name == "CP")
         {
             startPos = new Vector3(30f, 10.5f, -37f);
+            CPFlag.GetComponent<FlagScript>().activateFlag();
         }
     }
 }
