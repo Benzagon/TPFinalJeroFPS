@@ -7,9 +7,13 @@ public class FlagScript : MonoBehaviour
     public float flagRaiseSpeed;
     bool flagIsActive = false;
 
+    AudioSource audSrc;
+    public AudioClip yaySound;
+
     void Start()
     {
         gameObject.SetActive(false);
+        audSrc = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -26,6 +30,9 @@ public class FlagScript : MonoBehaviour
         {
             flagIsActive = true;
             gameObject.SetActive(true);
+
+            audSrc.clip = yaySound;
+            audSrc.Play();
         }
     }
 }
